@@ -1,0 +1,60 @@
+identifier: "[a-zA-Z_] [a-zA-Z_0-9]*";
+
+str: "\"[^\"\\]*(?:\\.[^\"\\]*)*\"";
+char: "'[^']'";
+hex: "0[xX][0-9A-Fa-f]+";
+bits: "0[bB][01]+";
+dec: "[0-9]+";
+bool: 'true'|'false';
+
+list<item>: (item (',' item)*)?;
+
+
+
+source sourceItem*;
+
+typeRef: {
+    |builtin: 'bool'|'int'|'long'|'char'|'string'|'double';
+    |custom: identifier;
+    |array: typeRef '['']';
+    |agentType: 'simple reflex'|'model-based reflex'|'goal-based'|'utility-based'|'learning';
+};
+
+sourceItem: {
+    |agent: 'agent' identifier'(' 'type' ':' agentType ')';
+    |
+};
+
+device: {
+    |PhysicalDevice: typeRef 'physical' ('sensor'|'actuator') identifier '(' list<argDef> ')' 'node''('id, id)
+    'where''(' expr ')';
+    |LogicalDevice: typeref 'logical' ('sensor'|'actuator') identifier '(' list<argDef> ')'
+    'where''(' expr ')';
+}
+
+rule: 'rule' identifier'(' list<argDef> ')' when
+
+statement: {
+    |when: 'when''(' expr ')'statement ('else' statement);
+    |block: '{' statement* '}';
+    |while: 'while' '(' expr ')'
+    |break: 'break';
+    |continue: 'continue';
+    |expression: expr;
+};
+
+expr: {
+    |binary: expr binOp expr;
+    |unary: unOp expr;
+    |braces: '(' expr ')';
+    |call: expr '(' list<expr> ')';
+    |indexer: expr '[' list<expr> ']';
+    |place: identifier;
+    |literal: bool|str|char|hex|bits|dec;
+
+};
+
+
+
+
+

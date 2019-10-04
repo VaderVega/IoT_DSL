@@ -1,0 +1,29 @@
+agent HVAC(type : simple reflex) {
+
+    double physical sensor temperature() node(1, 1)
+        where (temperature > 10 and temperature < 40)
+
+    int physical sensor humidity() node(1, 2)
+        where (humidity < 0.7 * temperature + 6.2)
+
+
+
+    boolean physical actuator heating(boolean conditioning) = false node(2, 1)
+        where (conditioning = true)
+            heating = false
+
+    boolean physical actuator conditioning(boolean heating) = false node(2,1)
+        where (heating = true)
+            conditioning = false
+    }
+
+
+    rule cool(temperature)
+        when(temperature < 18)
+            heating = true
+
+    rule warm(temperature)
+        when(temperature > 27)
+            heating = false
+    }
+}

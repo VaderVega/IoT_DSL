@@ -9,7 +9,7 @@ import static InternalDSL.Actuator.actuatorType.*;
 public class Main {
     public static void main(String[] args) {
 
-        IoTSystem()
+        IoTSystem("Climate control system")
                 .sensor(
                         "Temperature sensor 1",
                         TEMPERATURE
@@ -39,9 +39,8 @@ public class Main {
                         "Window opener",
                         STEPPERMOTOR
                         )
-                    .recieveValueUsing(WIFI);
-
-
+                    .recieveValueUsing(WIFI)
+                .generateCode("src/main/resources/GeneratedCode.ino");
 
 
     }

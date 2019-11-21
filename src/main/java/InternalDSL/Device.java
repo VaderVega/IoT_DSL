@@ -6,7 +6,7 @@ import java.util.Set;
 public class Device {
     private String name;
     private double value;
-    private Set<Network.networkType> networkType = new HashSet<>();
+    private Network.networkType networkType;
 
     public Device(String name) {
         this.name = name;
@@ -17,6 +17,10 @@ public class Device {
     }
 
     public void setNetworkType(Network.networkType type) {
-        networkType.add(type);
+        networkType = type;
+    }
+
+    public Network.networkType getNetworkType() {
+        return networkType;
     }
 }

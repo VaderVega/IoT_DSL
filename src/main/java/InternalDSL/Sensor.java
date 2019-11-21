@@ -11,6 +11,10 @@ public class Sensor extends Device {
         this.type = type;
     }
 
+    public sensorType getSensorType() {
+        return type;
+    }
+
     public enum sensorType {
         TEMPERATURE,
         HUMIDITY,

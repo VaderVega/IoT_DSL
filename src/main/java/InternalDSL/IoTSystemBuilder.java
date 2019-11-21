@@ -8,10 +8,9 @@ public class IoTSystemBuilder {
     }
 
     //Start the IoT DSL with this method:
-    public static IoTSystemBuilder IoTSystem(Device... devices) {
+    public static IoTSystemBuilder IoTSystem(String name) {
         IoTSystem system = new IoTSystem();
-        for (Device d : devices)
-            system.addDevice(d);
+        system.setName(name);
 
         return new IoTSystemBuilder();
     }
@@ -33,6 +32,11 @@ public class IoTSystemBuilder {
 
     public IoTSystemBuilder recieveValueUsing(Network.networkType type) {
         system.addNetworkToDevice(type);
+        return this;
+    }
+
+    public IoTSystemBuilder generateCode(String path) {
+        system.writeCodeToFile(path);
         return this;
     }
 

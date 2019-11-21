@@ -8,4 +8,8 @@ public class Network {
         BLUETOOTH,
         LoRaWAN
     }
+
+    public void addNetworkCode() {
+
+    }
 }

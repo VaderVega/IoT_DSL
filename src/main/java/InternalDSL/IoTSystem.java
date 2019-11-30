@@ -1,6 +1,7 @@
 package InternalDSL;
 
-import java.io.FileOutputStream;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,12 +85,13 @@ public class IoTSystem {
         }
     }
 
-    private void addSensorCode(Sensor.sensorType sensorType) {
+    private void addSensorCode(Sensor sensor) {
+        Sensor.sensorType sensorType = sensor.getSensorType();
         switch (sensorType) {
             case TEMPERATURE:
                 includeAndDefineCommands.append(
                         "#include \"DHT.h\"\n" +
-                        "#define DHTPIN 2\n" +
+                        "#define DHTPIN "+ sensor.getPort() +"\n" +
                         "DHT dht(DHTPIN, DHT22);\n"
                 );
                 setupPart.append(
@@ -115,36 +117,41 @@ public class IoTSystem {
     }
 
 
-    private String generateCode() {
+    public void generateCode(String path) {
         String resultCode = "";
         for (Device d : devices) {
             addNetworkToDevice(d.getNetworkType());
             if (d instanceof Sensor) {
-                addSensorCode(((Sensor) d).getSensorType());
+                Sensor sensor = (Sensor) d;
+                addSensorCode(sensor);
+                resultCode = includeAndDefineCommands.toString() +
+                        "void setup() {\n" +
+                        setupPart.toString() + "\n" +
+                        "}" + "\n" +
+                        "void loop() {\n"
+                        + loopPart.toString() + "\n" +
+                        "}";
+                writeCodeToFile(path, resultCode, sensor.getName());
+
+                includeAndDefineCommands.delete(0, includeAndDefineCommands.length());
+                setupPart.delete(0, setupPart.length());
+                loopPart.delete(0, loopPart.length());
             } else if (d instanceof Actuator) {
 
             }
         }
-
-        return resultCode = includeAndDefineCommands.toString() +
-                "void setup() {\n" +
-                setupPart.toString() + "\n" +
-                "}" + "\n" +
-                "void loop() {\n"
-                + loopPart.toString() + "\n" +
-                "}";
     }
 
-    public void writeCodeToFile(String path) {
-        String code = generateCode();
-        char [] charCode = code.toCharArray();
-        try (FileOutputStream fileOutputStream = new FileOutputStream(path)) {
-            for (char c : charCode) {
-                fileOutputStream.write(c);
-            }
 
+    public void writeCodeToFile(String path, String resultCode, String name) {
+        String code = resultCode;
+        File outputFile = new File(path, name +".ino");
+
+        try (FileWriter fileWriter = new FileWriter(outputFile)) {
+            fileWriter.write(code);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 }

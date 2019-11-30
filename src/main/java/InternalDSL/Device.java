@@ -16,6 +16,10 @@ public class Device {
         return value;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setNetworkType(Network.networkType type) {
         networkType = type;
     }

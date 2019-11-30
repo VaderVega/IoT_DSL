@@ -15,8 +15,8 @@ public class IoTSystemBuilder {
         return new IoTSystemBuilder();
     }
 
-    public IoTSystemBuilder sensor(String name, Sensor.sensorType type) {
-        system.addDevice(new Sensor(name, type));
+    public IoTSystemBuilder sensor(String name, Sensor.sensorType type, int portNumber) {
+        system.addDevice(new Sensor(name, type, portNumber));
         return this;
     }
 
@@ -36,7 +36,7 @@ public class IoTSystemBuilder {
     }
 
     public IoTSystemBuilder generateCode(String path) {
-        system.writeCodeToFile(path);
+        system.generateCode(path);
         return this;
     }
 

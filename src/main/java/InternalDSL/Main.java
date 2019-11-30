@@ -12,27 +12,32 @@ public class Main {
         IoTSystem("Climate control system")
                 .sensor(
                         "Temperature sensor 1",
-                        TEMPERATURE
+                        TEMPERATURE,
+                        12
                 )
                     .transmitValueUsing(BLUETOOTH)
                 .sensor(
                         "Temperature sensor 2",
-                        TEMPERATURE
+                        TEMPERATURE,
+                        12
                 )
                     .transmitValueUsing(BLUETOOTH)
                 .sensor(
                         "Temperature sensor 3",
-                        TEMPERATURE
+                        TEMPERATURE,
+                        11
                 )
                     .transmitValueUsing(BLUETOOTH)
                 .sensor(
                         "Movement sensor",
-                        MOVEMENT
+                        MOVEMENT,
+                        8
                 )
                     .transmitValueUsing(LoRaWAN)
                 .sensor(
                         "Humidity sensor",
-                        HUMIDITY
+                        HUMIDITY,
+                        9
                 )
                     .transmitValueUsing(WIFI)
                 .actuator(
@@ -40,7 +45,7 @@ public class Main {
                         STEPPERMOTOR
                         )
                     .recieveValueUsing(WIFI)
-                .generateCode("src/main/resources/GeneratedCode.ino");
+                .generateCode("src/main/resources/");
 
 
     }

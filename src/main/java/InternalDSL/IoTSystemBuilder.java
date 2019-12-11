@@ -7,7 +7,6 @@ public class IoTSystemBuilder {
         system = new IoTSystem();
     }
 
-    //Start the IoT DSL with this method:
     public static IoTSystemBuilder IoTSystem(String name) {
         IoTSystem system = new IoTSystem();
         system.setName(name);

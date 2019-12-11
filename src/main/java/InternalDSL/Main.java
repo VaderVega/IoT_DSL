@@ -34,16 +34,10 @@ public class Main {
                         8
                 )
                     .transmitValueUsing(LoRaWAN)
-                .sensor(
-                        "Humidity sensor",
-                        HUMIDITY,
-                        9
-                )
-                    .transmitValueUsing(WIFI)
                 .actuator(
                         "Window opener",
-                        STEPPERMOTOR
-                        )
+                        STEPPERMOTOR,
+                        8,9,10,11)
                     .recieveValueUsing(WIFI)
                 .generateCode("src/main/resources/");
 

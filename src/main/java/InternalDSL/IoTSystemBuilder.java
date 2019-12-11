@@ -25,8 +25,8 @@ public class IoTSystemBuilder {
         return this;
     }
 
-    public IoTSystemBuilder actuator(String name, Actuator.actuatorType type) {
-        system.addDevice(new Actuator(name, type));
+    public IoTSystemBuilder actuator(String name, Actuator.actuatorType type, int ... portNumbers) {
+        system.addDevice(new Actuator(name, type, portNumbers));
         return this;
     }
 

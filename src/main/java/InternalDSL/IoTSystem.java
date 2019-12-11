@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static InternalDSL.Actuator.actuatorType.*;
+
 public class IoTSystem {
     private String name;
 
@@ -112,6 +114,48 @@ public class IoTSystem {
             case HUMIDITY:
                 break;
             case MOVEMENT:
+                break;
+        }
+    }
+
+    private void addActuatorCode(Actuator actuator) {
+        Actuator.actuatorType actuatorType = actuator.getActuatorType();
+        List<Integer> portsList = actuator.getPort();
+        StringBuilder portSB = new StringBuilder();
+        switch (actuatorType) {
+            case STEPPERMOTOR:
+
+                for (Integer p : portsList)
+                    portSB.append(p).append(",");
+                includeAndDefineCommands.append(
+                        "#include <Stepper.h>\n" +
+                        "const int stepsPerRevolution = 200;\n" +
+                        "Stepper myStepper(stepsPerRevolution," + portSB.toString().substring(0, portSB.length() - 2) + ");\n"
+                );
+                setupPart.append(
+                        "myStepper.setSpeed(60);\n" +
+                        "Serial.begin(9600)\n"
+                );
+                loopPart.append(
+                        "Serial.println(\"Move right\");\n" +
+                        "myStepper.step(stepsPerRevolution)" +
+                        "delay(1000);" +
+                        "myStepper.step(-stepsPerRevolution);" +
+                        "delay(1000);"
+                );
+                break;
+            case RELAY:
+                String pinRelay = portsList.get(0).toString();
+                setupPart.append(
+                        "pinMode(" + pinRelay +  ", OUTPUT);\n" +
+                        "digitalWrite(PIN_RELAY, HIGH)\n;"
+                );
+                loopPart.append(
+                        "digitalWrite(" + pinRelay +  ", LOW);\n" +
+                        "delay(5000);\n" +
+                        "digitalWrite(" + pinRelay +  ", HIGH);\n" +
+                        "delay(5000);\n"
+                );
                 break;
         }
     }

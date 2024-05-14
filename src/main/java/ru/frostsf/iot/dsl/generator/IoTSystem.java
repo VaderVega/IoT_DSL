@@ -1,4 +1,4 @@
-package ru.frostsf.iot.dsl.service;
+package ru.frostsf.iot.dsl.generator;
 
 import java.io.File;
 import java.io.FileWriter;

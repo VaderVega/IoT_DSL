@@ -1,4 +1,4 @@
-package ru.frostsf.iot.dsl.service;
+package ru.frostsf.iot.dsl.generator;
 
 import ru.frostsf.iot.dsl.model.Actuator;
 import ru.frostsf.iot.dsl.model.Network;

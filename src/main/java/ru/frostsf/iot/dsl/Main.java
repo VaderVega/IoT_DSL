@@ -4,7 +4,7 @@ import static ru.frostsf.iot.dsl.model.Sensor.sensorType.*;
 
 import ru.frostsf.iot.dsl.model.Actuator.actuatorType;
 import ru.frostsf.iot.dsl.model.Network.networkType;
-import ru.frostsf.iot.dsl.service.IoTSystemBuilder;
+import ru.frostsf.iot.dsl.generator.IoTSystemBuilder;
 
 
 public class Main {

@@ -1,44 +1,45 @@
-package InternalDSL;
+package ru.frostsf.iot.dsl;
 
-import static InternalDSL.Sensor.sensorType.*;
-import static InternalDSL.Network.networkType.*;
-import static InternalDSL.IoTSystemBuilder.*;
-import static InternalDSL.Actuator.actuatorType.*;
+import static ru.frostsf.iot.dsl.model.Sensor.sensorType.*;
+
+import ru.frostsf.iot.dsl.model.Actuator.actuatorType;
+import ru.frostsf.iot.dsl.model.Network.networkType;
+import ru.frostsf.iot.dsl.service.IoTSystemBuilder;
 
 
 public class Main {
     public static void main(String[] args) {
 
-        IoTSystem("Climate control system")
+        IoTSystemBuilder.IoTSystem("Climate control system")
                 .sensor(
                         "Temperature sensor 1",
                         TEMPERATURE,
                         12
                 )
-                    .transmitValueUsing(BLUETOOTH)
+                    .transmitValueUsing(networkType.BLUETOOTH)
                 .sensor(
                         "Temperature sensor 2",
                         TEMPERATURE,
                         12
                 )
-                    .transmitValueUsing(BLUETOOTH)
+                    .transmitValueUsing(networkType.BLUETOOTH)
                 .sensor(
                         "Temperature sensor 3",
                         TEMPERATURE,
                         11
                 )
-                    .transmitValueUsing(BLUETOOTH)
+                    .transmitValueUsing(networkType.BLUETOOTH)
                 .sensor(
                         "Movement sensor",
                         MOVEMENT,
                         8
                 )
-                    .transmitValueUsing(LoRaWAN)
+                    .transmitValueUsing(networkType.LoRaWAN)
                 .actuator(
                         "Window opener",
-                        STEPPERMOTOR,
+                        actuatorType.STEPPERMOTOR,
                         8,9,10,11)
-                    .recieveValueUsing(WIFI)
+                    .recieveValueUsing(networkType.WIFI)
                 .generateCode("src/main/resources/");
 
 

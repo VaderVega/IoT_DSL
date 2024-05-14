@@ -1,12 +1,14 @@
-package InternalDSL;
+package ru.frostsf.iot.dsl.service;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static InternalDSL.Actuator.actuatorType.*;
+import ru.frostsf.iot.dsl.model.Actuator;
+import ru.frostsf.iot.dsl.model.Device;
+import ru.frostsf.iot.dsl.model.Network;
+import ru.frostsf.iot.dsl.model.Sensor;
 
 public class IoTSystem {
     private String name;

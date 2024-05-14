@@ -1,4 +1,4 @@
-package InternalDSL;
+package ru.frostsf.iot.dsl.model;
 
 
 import java.util.Arrays;

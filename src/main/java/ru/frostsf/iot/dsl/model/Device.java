@@ -1,7 +1,4 @@
-package InternalDSL;
-
-import java.util.HashSet;
-import java.util.Set;
+package ru.frostsf.iot.dsl.model;
 
 public class Device {
     private String name;

@@ -1,4 +1,8 @@
-package InternalDSL;
+package ru.frostsf.iot.dsl.service;
+
+import ru.frostsf.iot.dsl.model.Actuator;
+import ru.frostsf.iot.dsl.model.Network;
+import ru.frostsf.iot.dsl.model.Sensor;
 
 public class IoTSystemBuilder {
     private IoTSystem system;
